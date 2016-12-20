@@ -1,6 +1,6 @@
 import requests, bs4
 import openSheet
-sheet = openSheet.wks
+sheet = openSheet.wks.worksheet("BaseballAmerica")
 #This program Scrapes a website for the top fantasy prospects
 
 #Opens the site (computer language)
@@ -28,6 +28,14 @@ for players in siteSoup.findAll('td')[5:]:
     if i%5 == 0:
         x+=1
         i=0
+
+#Removes the numbers from the player row
+sheetList = sheet.range("A2:A101")
+i =1
+for player in sheetList:
+    i+=1
+    play = player.value[3:]
+    sheet.update_acell('A' + str(i), play)
 
 
 
