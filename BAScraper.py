@@ -1,8 +1,9 @@
 import requests, bs4
 import openSheet
 
+sheet = openSheet.wks.worksheet("BaseballAmerica")
+
 def scrapeBA():
-    sheet = openSheet.wks.worksheet("BaseballAmerica")
     # This program Scrapes a website for the top fantasy prospects
 
     # Opens the site (computer language)
@@ -40,3 +41,12 @@ def scrapeBA():
         sheet.update_acell('A' + str(i), play)
 
     print('Your worksheet is filled out')
+
+
+def removeVid():
+    removeList = sheet.range('E1:E101')
+    print("Removing the videos column...")
+    for remove in removeList:
+        remove.value = ''
+    sheet.update_cells(removeList)
+    print("Videos column removed.")
